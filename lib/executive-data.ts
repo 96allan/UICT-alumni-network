@@ -12,7 +12,7 @@ export interface ExecutiveMember {
 export const executiveCommittee: ExecutiveMember[] = [
   {
     id: "1",
-    name: "Dr. Sarah Nakamya",
+    name: "Mr. Okwi Simon",
     position: "Chairperson",
     photo: "/professional-african-woman-executive-chairperson.jpg",
     email: "chairperson@uictalumni.org",
@@ -22,7 +22,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "2",
-    name: "Mr. John Mukasa",
+    name: "Ms. Namanya Julian",
     position: "Vice Chairperson",
     photo: "/professional-african-man-vice-chairperson-suit.jpg",
     email: "vicechairperson@uictalumni.org",
@@ -32,7 +32,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "3",
-    name: "Ms. Grace Achieng",
+    name: "Mr. Engole Allan Gideon",
     position: "General Secretary",
     photo: "/professional-african-woman-secretary-corporate.jpg",
     email: "secretary@uictalumni.org",
@@ -42,7 +42,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "4",
-    name: "Mr. David Opio",
+    name: "Ms. Shamim kbabiito",
     position: "Treasurer",
     photo: "/professional-african-man-treasurer-finance.jpg",
     email: "treasurer@uictalumni.org",
@@ -52,7 +52,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "5",
-    name: "Ms. Faith Namukasa",
+    name: "Mr. Humphreys Muteese",
     position: "Publicity Secretary",
     photo: "/professional-african-woman-marketing-publicity.jpg",
     email: "publicity@uictalumni.org",
@@ -62,7 +62,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "6",
-    name: "Eng. Peter Ssemakula",
+    name: "Ms. Joan Apolot",
     position: "ICT & Engineering Representative",
     photo: "/professional-african-man-engineer-technology.jpg",
     email: "engineering@uictalumni.org",
@@ -72,7 +72,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "7",
-    name: "Prof. Agnes Kirabo",
+    name: "Mr. Muyonjo F.A Mugwiri",
     position: "Ex-Officio",
     photo: "/professional-african-woman-professor-academic.jpg",
     email: "exofficio@uictalumni.org",
@@ -82,7 +82,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "8",
-    name: "Mr. Brian Kato",
+    name: "Mr. Aventino Ahimbisibwe",
     position: "Guild Representative",
     photo: "/professional-young-african-man-student-leader.jpg",
     email: "guild@uictalumni.org",
@@ -92,7 +92,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "9",
-    name: "Dr. Margaret Nabukenya",
+    name: "Ms. Grace Komujuni Namirembe",
     position: "Management Representative",
     photo: "/professional-african-woman-management-executive.jpg",
     email: "management@uictalumni.org",
@@ -102,7 +102,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "10",
-    name: "Mr. Samuel Wasswa",
+    name: "Mr. Patrick Kakeeto",
     position: "Governing Council Representative",
     photo: "/professional-african-man-council-governance.jpg",
     email: "council@uictalumni.org",
@@ -112,7 +112,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "11",
-    name: "Ms. Esther Nansubuga",
+    name: "Eng. Edgar Ayine. M",
     position: "Social & Welfare Secretary",
     photo: "/professional-african-woman-social-welfare.jpg",
     email: "welfare@uictalumni.org",
@@ -122,7 +122,7 @@ export const executiveCommittee: ExecutiveMember[] = [
   },
   {
     id: "12",
-    name: "Mr. Isaac Mugisha",
+    name: "Mr. Erizura Tugume",
     position: "Social Media & Technical Support",
     photo: "/professional-african-man-social-media-technology.jpg",
     email: "socialmedia@uictalumni.org",
