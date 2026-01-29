@@ -115,7 +115,7 @@ export const executiveCommittee: ExecutiveMember[] = [
     name: "Eng. Edgar Ayine. M",
     position: "Social & Welfare Secretary",
     photo: "/professional-african-woman-social-welfare.jpg",
-    email: "welfare@uictalumni.org",
+    email: "edgarayine@gmail.com",
     phone: "+256 774 313 958",
     bio: "Coordinating social events and welfare programs for alumni members.",
     linkedIn: "https://linkedin.com/in/esthernansubuga",
