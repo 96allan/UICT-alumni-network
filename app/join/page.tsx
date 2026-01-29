@@ -33,13 +33,8 @@ export default function JoinPage() {
   const currentYear = new Date().getFullYear()
   const years = Array.from({ length: 30 }, (_, i) => String(currentYear - i))
   const departments = [
-    "Computer Science",
     "Information Technology",
-    "Software Engineering",
-    "Data Science",
-    "Cybersecurity",
-    "Network Engineering",
-    "Business Information Systems",
+    "Management",
   ]
 
   return (
