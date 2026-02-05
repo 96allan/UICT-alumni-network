@@ -1,3 +1,4 @@
+import React from 'react'
 import { ExecutiveCard } from "@/components/executive/executive-card"
 import { executiveCommittee } from "@/lib/executive-data"
 import { Navbar } from "@/components/navbar"
