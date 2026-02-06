@@ -4,17 +4,22 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, MapPin, Users } from "lucide-react"
 import type { Event } from "@/lib/events-data"
+import { useState } from "react"
 
 interface EventCardProps {
-  event: Event
+  event: Event;
+  isAdmin?: boolean; // New prop to check if user is an admin
 }
 
-export function EventCard({ event }: EventCardProps) {
+export function EventCard({ event, isAdmin = false }: EventCardProps) {
+  const [manualDate, setManualDate] = useState(event.date);
+  const [manualTime, setManualTime] = useState(event.time);
+
   const typeColors = {
     virtual: "bg-blue-100 text-blue-800",
     "in-person": "bg-green-100 text-green-800",
     hybrid: "bg-purple-100 text-purple-800",
-  }
+  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -22,8 +27,16 @@ export function EventCard({ event }: EventCardProps) {
       month: "short",
       day: "numeric",
       year: "numeric",
-    })
-  }
+    });
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setManualDate(e.target.value);
+  };
+
+  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setManualTime(e.target.value);
+  };
 
   return (
     <Card className="overflow-hidden transition-shadow hover:shadow-lg">
@@ -42,11 +55,29 @@ export function EventCard({ event }: EventCardProps) {
         <div className="space-y-2 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4 text-primary" />
-            <span>{formatDate(event.date)}</span>
+            {isAdmin ? (
+              <input
+                type="date"
+                value={manualDate}
+                onChange={handleDateChange}
+                className="border rounded p-1 text-sm"
+              />
+            ) : (
+              <span>{formatDate(manualDate)}</span>
+            )}
           </div>
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4 text-primary" />
-            <span>{event.time}</span>
+            {isAdmin ? (
+              <input
+                type="time"
+                value={manualTime}
+                onChange={handleTimeChange}
+                className="border rounded p-1 text-sm"
+              />
+            ) : (
+              <span>{manualTime}</span>
+            )}
           </div>
           <div className="flex items-center gap-2">
             <MapPin className="h-4 w-4 text-primary" />
@@ -62,5 +93,5 @@ export function EventCard({ event }: EventCardProps) {
         <Button className="w-full">Register Now</Button>
       </CardFooter>
     </Card>
-  )
+  );
 }
