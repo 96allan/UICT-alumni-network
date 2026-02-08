@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, MapPin, Users } from "lucide-react"
 import type { Event } from "@/lib/events-data"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface EventCardProps {
   event: Event;
@@ -14,6 +14,7 @@ interface EventCardProps {
 export function EventCard({ event, isAdmin = false }: EventCardProps) {
   const [manualDate, setManualDate] = useState(event.date);
   const [manualTime, setManualTime] = useState(event.time);
+  const [formattedDate, setFormattedDate] = useState(manualDate);
 
   const typeColors = {
     virtual: "bg-blue-100 text-blue-800",
@@ -37,6 +38,14 @@ export function EventCard({ event, isAdmin = false }: EventCardProps) {
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setManualTime(e.target.value);
   };
+
+  useEffect(() => {
+    try {
+      setFormattedDate(formatDate(manualDate));
+    } catch (err) {
+      setFormattedDate(manualDate);
+    }
+  }, [manualDate]);
 
   return (
     <Card className="overflow-hidden transition-shadow hover:shadow-lg">
@@ -63,7 +72,7 @@ export function EventCard({ event, isAdmin = false }: EventCardProps) {
                 className="border rounded p-1 text-sm"
               />
             ) : (
-              <span>{formatDate(manualDate)}</span>
+              <span>{formattedDate}</span>
             )}
           </div>
           <div className="flex items-center gap-2">
