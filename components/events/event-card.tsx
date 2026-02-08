@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -5,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, MapPin, Users } from "lucide-react"
 import type { Event } from "@/lib/events-data"
 import { useState, useEffect } from "react"
+import { createEntry } from "@/lib/client-api"
 
 interface EventCardProps {
   event: Event;
@@ -15,6 +18,8 @@ export function EventCard({ event, isAdmin = false }: EventCardProps) {
   const [manualDate, setManualDate] = useState(event.date);
   const [manualTime, setManualTime] = useState(event.time);
   const [formattedDate, setFormattedDate] = useState(manualDate);
+  const [registering, setRegistering] = useState(false)
+  const [registered, setRegistered] = useState(false)
 
   const typeColors = {
     virtual: "bg-blue-100 text-blue-800",
@@ -46,6 +51,21 @@ export function EventCard({ event, isAdmin = false }: EventCardProps) {
       setFormattedDate(manualDate);
     }
   }, [manualDate]);
+
+  const handleRegister = async () => {
+    if (registered || registering) return
+    setRegistering(true)
+    try {
+      await createEntry("event", { id: event.id, title: event.title })
+      setRegistered(true)
+      alert("Registration successful")
+    } catch (err) {
+      console.error(err)
+      alert("Registration failed")
+    } finally {
+      setRegistering(false)
+    }
+  }
 
   return (
     <Card className="overflow-hidden transition-shadow hover:shadow-lg">
@@ -99,7 +119,9 @@ export function EventCard({ event, isAdmin = false }: EventCardProps) {
         </div>
       </CardContent>
       <CardFooter className="border-t border-border bg-secondary/20 px-5 py-4">
-        <Button className="w-full">Register Now</Button>
+        <Button className="w-full" onClick={handleRegister} disabled={registering || registered}>
+          {registered ? "Registered" : registering ? "Registering..." : "Register Now"}
+        </Button>
       </CardFooter>
     </Card>
   );

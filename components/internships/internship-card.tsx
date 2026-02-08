@@ -1,9 +1,13 @@
+"use client"
+
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Clock, Calendar, Briefcase } from "lucide-react"
 import type { Internship } from "@/lib/internships-data"
+import { useState } from "react"
+import { createEntry } from "@/lib/client-api"
 
 interface InternshipCardProps {
   internship: Internship
@@ -82,10 +86,38 @@ export function InternshipCard({ internship }: InternshipCardProps) {
         </div>
 
         <div className="mt-4 flex gap-3">
-          <Button className="flex-1">Apply Now</Button>
-          <Button variant="outline">Save</Button>
+          <InternshipActions internship={internship} />
         </div>
       </CardContent>
     </Card>
+  )
+}
+
+function InternshipActions({ internship }: { internship: Internship }) {
+  const [applying, setApplying] = useState(false)
+  const [applied, setApplied] = useState(false)
+
+  const handleApply = async () => {
+    if (applying || applied) return
+    setApplying(true)
+    try {
+      await createEntry("internship", { id: internship.id, title: internship.title, company: internship.company })
+      setApplied(true)
+      alert("Application submitted")
+    } catch (err) {
+      console.error(err)
+      alert("Application failed")
+    } finally {
+      setApplying(false)
+    }
+  }
+
+  return (
+    <>
+      <Button className="flex-1" onClick={handleApply} disabled={applying || applied}>
+        {applied ? "Applied" : applying ? "Applying..." : "Apply Now"}
+      </Button>
+      <Button variant="outline">Save</Button>
+    </>
   )
 }

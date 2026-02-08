@@ -9,6 +9,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { createEntry } from "@/lib/client-api"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -27,7 +28,23 @@ export default function JoinPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle registration logic
+    ;(async () => {
+      try {
+        await createEntry("user", formData)
+        alert("Account created — check data/entries.json for the saved record (dev mode)")
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          graduationYear: "",
+          department: "",
+        })
+      } catch (err) {
+        console.error(err)
+        alert("Failed to create account")
+      }
+    })()
   }
 
   const currentYear = new Date().getFullYear()

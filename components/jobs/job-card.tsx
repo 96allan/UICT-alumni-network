@@ -1,9 +1,13 @@
+"use client"
+
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Clock, DollarSign, Briefcase } from "lucide-react"
 import type { Job } from "@/lib/jobs-data"
+import { useState } from "react"
+import { createEntry } from "@/lib/client-api"
 
 interface JobCardProps {
   job: Job
@@ -87,10 +91,38 @@ export function JobCard({ job }: JobCardProps) {
         </div>
 
         <div className="mt-4 flex gap-3">
-          <Button className="flex-1">Apply Now</Button>
-          <Button variant="outline">Save</Button>
+          <JobActions job={job} />
         </div>
       </CardContent>
     </Card>
+  )
+}
+
+function JobActions({ job }: { job: Job }) {
+  const [applying, setApplying] = useState(false)
+  const [applied, setApplied] = useState(false)
+
+  const handleApply = async () => {
+    if (applying || applied) return
+    setApplying(true)
+    try {
+      await createEntry("job", { id: job.id, title: job.title, company: job.company })
+      setApplied(true)
+      alert("Application submitted")
+    } catch (err) {
+      console.error(err)
+      alert("Application failed")
+    } finally {
+      setApplying(false)
+    }
+  }
+
+  return (
+    <>
+      <Button className="flex-1" onClick={handleApply} disabled={applying || applied}>
+        {applied ? "Applied" : applying ? "Applying..." : "Apply Now"}
+      </Button>
+      <Button variant="outline">Save</Button>
+    </>
   )
 }
